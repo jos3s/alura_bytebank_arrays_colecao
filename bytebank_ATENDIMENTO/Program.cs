@@ -22,8 +22,16 @@ public class Program
 
             itens.Listar();
 
-            itens.Remover(conta);
-            itens.Listar();
+            //itens.Remover(conta);
+            //itens.Listar();
+
+
+            for (int i = 0; i < itens.Tamanho; i++)
+            {
+                //ContaCorrente c = itens.RecuparItemPorIndice(i);
+                ContaCorrente c = itens[i];
+                Console.WriteLine(c.ToString());
+            }
         }
         catch (Exception ex)
         {

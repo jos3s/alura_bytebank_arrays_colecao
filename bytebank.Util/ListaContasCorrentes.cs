@@ -12,6 +12,12 @@ namespace bytebank_Util
         private ContaCorrente[] _itens = null;
         private int _proximaPosicao = 0;
 
+        public int Tamanho {
+            get {
+                return _proximaPosicao;
+            } 
+        }
+
         public ListaContasCorrentes(int tamInicial = 5)
         {
             _itens = new ContaCorrente[tamInicial];
@@ -39,7 +45,7 @@ namespace bytebank_Util
 
             for (int i = indiceItem; i < _proximaPosicao - 1; i++)
             {
-                _itens[i] = _itens[i+1];
+                _itens[i] = _itens[i + 1];
             }
             _proximaPosicao--;
             _itens[_proximaPosicao] = null;
@@ -59,13 +65,29 @@ namespace bytebank_Util
                 _itens = novoArray;
             }
         }
-    
+
         public void Listar()
         {
             for (int i = 0; i < _itens.Length; i++)
             {
                 if (_itens[i] != null)
                     Console.WriteLine($"Indice[{i}] - Conta: {_itens[i].Conta}, N. da Agência: {_itens[i].Numero_agencia}");
+            }
+        }
+
+        public ContaCorrente RecuparItemPorIndice(int indice)
+        {
+            if (indice < 0 || indice >= _proximaPosicao)
+                throw new ArgumentOutOfRangeException(nameof(indice));
+
+            return _itens[indice];
+        }
+
+        public ContaCorrente this[int indice]
+        {
+            get
+            {
+                return RecuparItemPorIndice(indice);
             }
         }
     }
